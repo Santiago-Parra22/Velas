@@ -1,65 +1,28 @@
-
-const catalog = document.querySelector("#catalogo");
-
-function renderProducts() {
-    catalog.innerHTML = `
-        <div class="max-w-7xl mx-auto px-6 py-20">
-            <div class="text-center mb-12">
-                <p class="uppercase tracking-[0.3em] text-sm">
-                    Nuestra colección
-                </p>
-                <h2 class="text-4xl mt-3">
-                    Encuentra tu esencia
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                ${products.map(product => `
-                    <article class="product-card">
-                        <img
-                            src="${product.image}"
-                            alt="${product.name}"
-                            class="w-full aspect-square object-cover rounded-xl"
-                        >
-
-                        <div class="pt-4">
-                            <h3 class="text-xl font-semibold">
-                                ${product.name}
-                            </h3>
-
-                            <p class="text-sm my-2">
-                                ${product.description}
-                            </p>
-
-                            <p class="font-semibold mb-4">
-                                $${product.price.toLocaleString("es-CO")}
-                            </p>
-
-                            <button
-                                onclick="contactWhatsApp('${product.name}')"
-                                class="w-full bg-[#655044] text-white py-3 rounded-lg"
-                            >
-                                Consultar producto
-                            </button>
-                        </div>
-                    </article>
-                `).join("")}
-            </div>
-        </div>
-    `;
+const grid = document.querySelector("#product-grid");
+const filters = document.querySelectorAll(".filter");
+const categoryTrack = document.querySelector("#category-track");
+function whatsappLink(message) { return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`; }
+function renderProducts(filter = "Todas") {
+  const visible = filter === "Todas" ? products : products.filter(p => p.category === filter);
+  grid.innerHTML = visible.map(product => `
+    <article class="product-card">
+      <div class="product-image catalog-placeholder"><span class="placeholder-mark">✳</span><span class="placeholder-category">${product.category}</span><span class="placeholder-title">${product.name}</span><a class="source-link" href="${product.sourceUrl}" target="_blank" rel="noopener">VER FOTO ORIGINAL ↗</a></div>
+      <div class="product-info"><div class="product-meta"><span>${product.category}</span><span>✳ Diseño disponible para consulta</span></div><h3>${product.name}</h3><p>${product.description}</p><a class="product-link" href="${whatsappLink(`Hola, quiero información sobre el diseño ${product.name}. ¿Me comparten precio, tamaños y disponibilidad?`)}" target="_blank" rel="noopener">CONSULTAR POR WHATSAPP ↗</a></div>
+    </article>`).join("");
 }
-
-function contactWhatsApp(productName) {
-    const phone = "573001234567";
-
-    const message = encodeURIComponent(
-        `Hola, estoy interesado/a en la ${productName}. ¿Me puedes dar más información?`
-    );
-
-    window.open(
-        `https://wa.me/${phone}?text=${message}`,
-        "_blank"
-    );
-}
-
+filters.forEach(button => button.addEventListener("click", () => {
+  filters.forEach(item => item.classList.remove("active"));
+  button.classList.add("active");
+  renderProducts(button.dataset.filter);
+}));
+document.querySelectorAll(".carousel-arrow").forEach(button => button.addEventListener("click", () => {
+  const direction = button.dataset.direction === "next" ? 1 : -1;
+  categoryTrack.scrollBy({ left: direction * Math.max(220, categoryTrack.clientWidth * 0.72), behavior: "smooth" });
+}));
+const generalMessage = "Hola, vi su catálogo de velas y quisiera conocer los diseños disponibles y hacer un pedido.";
+["general-whatsapp", "floating-whatsapp"].forEach(id => { const el = document.getElementById(id); if (el) el.href = whatsappLink(generalMessage); });
+const menuToggle = document.querySelector(".menu-toggle"); const nav = document.querySelector(".main-nav");
+menuToggle.addEventListener("click", () => { const isOpen = nav.classList.toggle("open"); menuToggle.setAttribute("aria-expanded", String(isOpen)); });
+nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => { nav.classList.remove("open"); menuToggle.setAttribute("aria-expanded", "false"); }));
+document.getElementById("year").textContent = new Date().getFullYear();
 renderProducts();
