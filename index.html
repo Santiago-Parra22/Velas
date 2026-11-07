@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#173D2B">
-  <meta name="description" content="Explora nuestro catálogo de velas con diseños navideños, personajes, animales, fútbol y mucho más.">
-  <title>Catálogo de velas</title>
+  <meta name="theme-color" content="#171511">
+  <meta name="description" content="Velas personalizadas hechas para convertir tus momentos en recuerdos. Diseña una pieza única.">
+  <title>LUMÉ — Catálogo de velas artesanales</title>
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
     <nav class="main-nav">
       <a href="#coleccion">Colección</a>
       <a href="#nosotros">Nuestra esencia</a>
-      <a class="nav-cta" href="#contacto">Hacer un pedido <span>↗</span></a>
+      <a class="nav-cta" href="#contacto">Cotizar mi vela <span>↗</span></a>
     </nav>
   </header>
 
@@ -41,7 +41,7 @@
       <div class="hero-art">
         <div class="hero-image"></div>
         <div class="hero-caption"><span>01 / 03</span><span>LA BELLEZA ESTÁ EN LOS DETALLES</span></div>
-        <div class="hero-seal">MAGIA<br><b>NAVIDEÑA</b><br>✳</div>
+        <div class="hero-seal">HECHO<br><b>PARA TI</b><br>✳</div>
       </div>
     </section>
 
@@ -55,24 +55,47 @@
         <div><p class="eyebrow">EXPLORA TODOS LOS DISEÑOS</p><h2>Encuentra tu próxima <em>favorita.</em></h2></div>
         <p class="section-description">Explora las colecciones por temática. Abre la foto original en OneDrive y consulta por WhatsApp precios, tamaños y disponibilidad.</p>
       </div>
-      <div class="category-carousel" aria-label="Carrusel de categorías">
-        <button class="carousel-arrow" type="button" data-direction="prev" aria-label="Ver categorías anteriores">‹</button>
-        <div class="filter-row" id="category-track" aria-label="Filtrar colección" tabindex="0">
-          <button class="filter active" data-filter="Todas"><span class="filter-icon">✳</span><span>Todos los diseños</span></button>
-          <button class="filter" data-filter="Navidad y temporada"><span class="filter-icon">✧</span><span>Navidad</span></button>
-          <button class="filter" data-filter="Animales"><span class="filter-icon">♧</span><span>Animales</span></button>
-          <button class="filter" data-filter="Personajes"><span class="filter-icon">❋</span><span>Personajes</span></button>
-          <button class="filter" data-filter="Fútbol"><span class="filter-icon">◉</span><span>Fútbol</span></button>
-          <button class="filter" data-filter="Fe y espiritualidad"><span class="filter-icon">✧</span><span>Fe y espiritualidad</span></button>
-          <button class="filter" data-filter="Oficios y profesiones"><span class="filter-icon">✳</span><span>Oficios</span></button>
-          <button class="filter" data-filter="Bienestar y mensajes"><span class="filter-icon">♡</span><span>Bienestar</span></button>
-          <button class="filter" data-filter="Mensajes y ocasiones"><span class="filter-icon">❀</span><span>Ocasiones</span></button>
-          <button class="filter" data-filter="Aficiones y estilo de vida"><span class="filter-icon">✦</span><span>Aficiones</span></button>
-          <button class="filter" data-filter="Vinilos"><span class="filter-icon">✎</span><span>Vinilos</span></button>
-        </div>
-        <button class="carousel-arrow" type="button" data-direction="next" aria-label="Ver más categorías">›</button>
+      <div class="filter-row" aria-label="Filtrar colección">
+        <button class="filter active" data-filter="Todas">Todos los diseños</button>
+        <button class="filter" data-filter="Navidad y temporada">Navidad</button>
+        <button class="filter" data-filter="Animales">Animales</button>
+        <button class="filter" data-filter="Personajes">Personajes</button>
+        <button class="filter" data-filter="Fútbol">Fútbol</button>
+        <button class="filter" data-filter="Fe y espiritualidad">Fe y espiritualidad</button>
+        <button class="filter" data-filter="Oficios y profesiones">Oficios</button>
+        <button class="filter" data-filter="Bienestar y mensajes">Bienestar</button>
+        <button class="filter" data-filter="Mensajes y ocasiones">Ocasiones</button>
+        <button class="filter" data-filter="Aficiones y estilo de vida">Aficiones</button>
+        <button class="filter" data-filter="Personalizados">Personalizados</button>
       </div>
-      <div class="product-grid" id="product-grid"></div>
+      <div class="carousel-controls" aria-label="Controles del carrusel">
+        <span class="carousel-count" id="carousel-count">38 colecciones</span>
+        <div class="carousel-arrows">
+          <button type="button" class="carousel-arrow" id="carousel-prev" aria-label="Colección anterior">←</button>
+          <button type="button" class="carousel-arrow" id="carousel-next" aria-label="Colección siguiente">→</button>
+          <button type="button" class="carousel-arrow carousel-play" id="carousel-toggle" aria-label="Pausar avance automático" aria-pressed="false">Ⅱ</button>
+        </div>
+      </div>
+      <div class="product-carousel" id="product-carousel">
+        <div class="product-track" id="product-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="custom-section" id="personaliza">
+      <div class="custom-art">
+        <div class="custom-art-inner"><span>UNA PIEZA</span><strong>IRREPETIBLE</strong><i>✳</i></div>
+      </div>
+      <div class="custom-copy">
+        <p class="eyebrow">DETALLES QUE HACEN ESPECIAL LA TEMPORADA</p>
+        <h2>Un detalle pensado<br><em>para cada persona.</em></h2>
+        <p>Elige entre personajes, animales, equipos, mensajes y motivos especiales. También puedes consultar opciones personalizadas para crear un detalle con tu propio estilo.</p>
+        <ul class="detail-list">
+          <li><span>01</span> Descubre los diseños disponibles</li>
+          <li><span>02</span> Consulta tamaños, colores y acabados</li>
+          <li><span>03</span> Coordina tu pedido por WhatsApp</li>
+        </ul>
+        <a href="#contacto" class="button button-dark">Cotizar diseños navideños <span>↗</span></a>
+      </div>
     </section>
 
     <section class="essence section-wrap" id="nosotros">
@@ -103,9 +126,9 @@
   </main>
 
   <footer class="footer">
-    <a class="brand brand-footer" href="#inicio"><span class="brand-mark">✦</span><span><strong>CATÁLOGO DE VELAS</strong><small>DISEÑOS PARA CADA OCASIÓN</small></span></a>
-    <p>Una luz especial para cada momento.</p>
-    <span class="copyright">© <span id="year"></span> CATÁLOGO DE VELAS.</span>
+    <a class="brand brand-footer" href="#inicio"><span class="brand-mark">L.</span><span><strong>LUMÉ</strong><small>VELAS ARTESANALES</small></span></a>
+    <p>La magia está en los detalles.</p>
+    <span class="copyright">© <span id="year"></span> LUMÉ. HECHO CON INTENCIÓN.</span>
   </footer>
 
   <a class="whatsapp-float" id="floating-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">✆</a>
